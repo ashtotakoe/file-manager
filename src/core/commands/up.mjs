@@ -1,7 +1,5 @@
-import { state } from '../state.mjs'
+import { cd } from './cd.mjs'
 
-export const up = (...args) => {
-  let { workingDirectory, currentDirectory } = state
-
-  console.log(workingDirectory, currentDirectory)
+export const up = async (...args) => {
+  await cd('..')
 }
