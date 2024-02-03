@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { getUsername } from './utils/get-user-name.mjs'
 import { getWorkingDirectory } from './utils/get-working-directory.mjs'
 import { isUsernameAndWorkingDirectoryPresent } from './utils/check-username-and-working-directory.mjs'
+import { implementedCommands } from './core/implemented-commands.mjs'
+import { state } from './core/state.mjs'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -20,13 +22,28 @@ if (!isUsernameAndWorkingDirectoryPresent(username, workingDirectory)) {
   process.exit()
 }
 
-console.log(`Welcome to the File Manager, ${username}!`)
-console.log(`You are currently in ${workingDirectory}`)
+state.workingDirectory = workingDirectory
+state.username = username
+
+console.log(`Welcome to the File Manager, ${state.username}!`)
+console.log(`You are currently in ${state.currentDirectory}`)
 
 rl.on('line', (input) => {
   if (input === '.exit') {
     rl.close()
+    return
   }
+
+  const tokkens = input.split(' ')
+  const commandName = tokkens.shift()
+
+  const command = implementedCommands[commandName]
+  if (command) {
+    command(...tokkens)
+    return
+  }
+
+  console.log('Invalid input')
 })
 
 process.on('beforeExit', () => {
