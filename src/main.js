@@ -6,12 +6,13 @@ import { getWorkingDirectory } from './utils/get-working-directory.mjs'
 import { isUsernameAndWorkingDirectoryPresent } from './utils/check-username-and-working-directory.mjs'
 import { implementedCommands } from './core/implemented-commands.mjs'
 import { state } from './core/state.mjs'
-import { showInvalidInputError } from './utils/show-invalid-input-error.mjs'
+import { displayInvalidInput } from './utils/display-invalid-input.mjs'
 import { displayCurrentDirectory } from './utils/display-current-directory.mjs'
+import { displayOperationFailed } from './utils/display-operation-failed.mjs'
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: false,
 })
 
 const username = getUsername(process.argv)
@@ -40,17 +41,24 @@ rl.on('line', async (input) => {
   const commandName = tokkens.shift()
 
   const command = implementedCommands[commandName]
+
   if (command) {
     rl.pause()
 
-    await command(...tokkens)
+    try {
+      await command(...tokkens)
+    } catch (err) {
+      console.log(err) 
+      displayOperationFailed()
+    }
 
     displayCurrentDirectory()
     rl.resume()
+
     return
   }
 
-  showInvalidInputError()
+  displayInvalidInput()
   displayCurrentDirectory()
 })
 

@@ -1,3 +1,9 @@
+/**
+ * @param {string} username
+ * @param {string} workingDirectory
+ * @returns {boolean}
+ */
+
 export const isUsernameAndWorkingDirectoryPresent = (
   username,
   workingDirectory

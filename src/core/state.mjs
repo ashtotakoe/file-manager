@@ -5,6 +5,9 @@ const data = {
 }
 
 export const state = {
+  /**
+   * @param {string} currentDirectory
+   */
   set currentDirectory(currentDirectory) {
     data.currentDirectory = currentDirectory
   },
@@ -13,6 +16,9 @@ export const state = {
     return data.currentDirectory
   },
 
+  /**
+   * @param {string} workingDirectory
+   */
   set workingDirectory(workingDirectory) {
     if (!data.workingDirectory) {
       data.workingDirectory = workingDirectory
@@ -24,12 +30,18 @@ export const state = {
     return data.workingDirectory
   },
 
+  /**
+   * @param {string} currentDirectory
+   */
   set username(username) {
     if (!data.username) {
       data.username = username
     }
   },
 
+  /**
+   * @returns {string}
+   */
   get username() {
     return data.username
   },
