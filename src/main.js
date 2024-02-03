@@ -6,6 +6,8 @@ import { getWorkingDirectory } from './utils/get-working-directory.mjs'
 import { isUsernameAndWorkingDirectoryPresent } from './utils/check-username-and-working-directory.mjs'
 import { implementedCommands } from './core/implemented-commands.mjs'
 import { state } from './core/state.mjs'
+import { showInvalidInputError } from './utils/show-invalid-input-error.mjs'
+import { displayCurrentDirectory } from './utils/display-current-directory.mjs'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -26,9 +28,9 @@ state.workingDirectory = workingDirectory
 state.username = username
 
 console.log(`Welcome to the File Manager, ${state.username}!`)
-console.log(`You are currently in ${state.currentDirectory}`)
+displayCurrentDirectory()
 
-rl.on('line', (input) => {
+rl.on('line', async (input) => {
   if (input === '.exit') {
     rl.close()
     return
@@ -39,11 +41,17 @@ rl.on('line', (input) => {
 
   const command = implementedCommands[commandName]
   if (command) {
-    command(...tokkens)
+    rl.pause()
+
+    await command(...tokkens)
+
+    displayCurrentDirectory()
+    rl.resume()
     return
   }
 
-  console.log('Invalid input')
+  showInvalidInputError()
+  displayCurrentDirectory()
 })
 
 process.on('beforeExit', () => {
