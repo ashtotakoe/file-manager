@@ -16,10 +16,7 @@ const rl = readline.createInterface({
 })
 
 const username = getUsername(process.argv)
-const workingDirectory = getWorkingDirectory(
-  dirname(fileURLToPath(import.meta.url)),
-  username
-)
+const workingDirectory = getWorkingDirectory()
 
 if (!isUsernameAndWorkingDirectoryPresent(username, workingDirectory)) {
   process.exit()
