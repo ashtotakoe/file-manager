@@ -8,6 +8,7 @@ import { rm } from './commands/rm.mjs'
 import { rn } from './commands/rn.mjs'
 import { mv } from './commands/mv.mjs'
 import { osCommand as os } from './commands/os.command.mjs'
+import { hash } from './commands/hash.mjs'
 
 export const implementedCommands = {
   up,
@@ -19,5 +20,6 @@ export const implementedCommands = {
   cp,
   mv,
   rn,
-  os
+  os,
+  hash
 }
