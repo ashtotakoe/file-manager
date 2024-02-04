@@ -24,7 +24,6 @@ export const cp = async (input, outputDir) => {
     path.basename(input)
   )
 
-  console.log(inputPath, outputPath)
 
   const inputFile = await fs.open(inputPath, 'r')
   const outputFile = await fs.open(outputPath, 'w')

@@ -7,8 +7,9 @@ import { add } from './commands/add.mjs'
 import { rm } from './commands/rm.mjs'
 import { rn } from './commands/rn.mjs'
 import { mv } from './commands/mv.mjs'
-import { osCommand as os } from './commands/os.command.mjs'
 import { hash } from './commands/hash.mjs'
+import { osCommand as os } from './commands/os.command.mjs'
+import { makeCompression } from './commands/compress.mjs'
 
 export const implementedCommands = {
   up,
@@ -21,5 +22,8 @@ export const implementedCommands = {
   mv,
   rn,
   os,
-  hash
+  hash,
+  compress: (input, output ) => makeCompression(input, output, { decompress: false }),
+  decompress: (input, output ) => makeCompression(input, output, { decompress: true }),
+
 }
