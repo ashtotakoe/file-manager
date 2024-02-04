@@ -37,8 +37,8 @@ rl.on('line', async (input) => {
     return
   }
 
-  const tokkens = input.split(' ')
-  const commandName = tokkens.shift()
+  const tokens = input.split(' ')
+  const commandName = tokens.shift()
 
   const command = implementedCommands[commandName]
 
@@ -46,9 +46,8 @@ rl.on('line', async (input) => {
     rl.pause()
 
     try {
-      await command(...tokkens)
+      await command(...tokens)
     } catch (err) {
-      console.log(err) 
       displayOperationFailed()
     }
 

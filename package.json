@@ -5,7 +5,7 @@
   "description": "My file manager implementation!!!",
   "main": "src/main.js",
   "scripts": {
-    "s": "node --watch . --username=egormartynov",
+    "s": "node --watch . --username=egor",
     "start": "node src/main.js"
 
   },
