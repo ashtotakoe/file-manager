@@ -1,5 +1,5 @@
-import fs from 'fs/promises'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import { pipeline } from 'stream/promises'
 import { state } from '../state.mjs'
 import { displayInvalidInput } from '../../utils/display-invalid-input.mjs'
