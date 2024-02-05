@@ -1,0 +1,12 @@
+{
+  "name": "file-manager",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "My file manager implementation!!!",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "author": "@ashtotakoe",
+  "license": "ISC"
+}
